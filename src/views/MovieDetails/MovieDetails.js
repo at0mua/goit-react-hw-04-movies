@@ -29,8 +29,8 @@ class MovieDetails extends Component {
 
   render() {
     const { movie } = this.state;
-    const { match, location } = this.props;
-    const { url, path } = match;
+    const { state } = this.props.location;
+    const { url, path } = this.props.match;
     const date = new Date();
     return (
       <div className={s.movie_details}>
@@ -76,7 +76,7 @@ class MovieDetails extends Component {
           <NavLink
             to={{
               pathname: `${url}/cast`,
-              state: { from: location },
+              state: { from: state.from },
             }}
             className={s.link}
             activeClassName={s.link_active}
@@ -86,7 +86,7 @@ class MovieDetails extends Component {
           <NavLink
             to={{
               pathname: `${url}/reviews`,
-              state: { from: location },
+              state: { from: state.from },
             }}
             className={s.link}
             activeClassName={s.link_active}
