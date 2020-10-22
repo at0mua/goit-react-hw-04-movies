@@ -29,7 +29,8 @@ class MovieDetails extends Component {
 
   render() {
     const { movie } = this.state;
-    const { url, path } = this.props.match;
+    const { match, location } = this.props;
+    const { url, path } = match;
     const date = new Date();
     return (
       <div className={s.movie_details}>
@@ -70,35 +71,41 @@ class MovieDetails extends Component {
             </div>
           </div>
         )}
-        <div>
-          <h3>Additional information</h3>
+        <div className={s.movie_add_info}>
+          <h3 className={s.movie_add_title}>Additional information</h3>
           <NavLink
-            to={`${url}/cast`}
+            to={{
+              pathname: `${url}/cast`,
+              state: { from: location },
+            }}
             className={s.link}
             activeClassName={s.link_active}
           >
             Cast
           </NavLink>
           <NavLink
-            to={`${url}/reviews`}
+            to={{
+              pathname: `${url}/reviews`,
+              state: { from: location },
+            }}
             className={s.link}
             activeClassName={s.link_active}
           >
             Reviews
           </NavLink>
-          <Route
-            path={`${path}/cast`}
-            render={({ match: { params } }) => {
-              return <Cast movieId={params.movieId} />;
-            }}
-          />
-          <Route
-            path={`${path}/reviews`}
-            render={({ match: { params } }) => {
-              return <Reviews movieId={params.movieId} />;
-            }}
-          />
         </div>
+        <Route
+          path={`${path}/cast`}
+          render={({ match: { params } }) => {
+            return <Cast movieId={params.movieId} />;
+          }}
+        />
+        <Route
+          path={`${path}/reviews`}
+          render={({ match: { params } }) => {
+            return <Reviews movieId={params.movieId} />;
+          }}
+        />
       </div>
     );
   }

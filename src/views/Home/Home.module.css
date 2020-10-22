@@ -1,0 +1,9 @@
+.title {
+  padding-left: 15px;
+}
+
+.movie_list {
+  margin: 0;
+  padding-left: 15px;
+  list-style: none;
+}

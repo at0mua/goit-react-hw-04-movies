@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import Navigation from "./Navigation/Navigation";
-import Home from "../views/Home";
-import Movies from "../views/Movies";
+import Home from "../views/Home/Home";
+import Movies from "../views/Movies/Movies";
 import MovieDetails from "../views/MovieDetails/MovieDetails";
 import routes from "../routes";
 

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import s from "./SearchForm.module.css";
+
 class SearchForm extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
@@ -23,13 +25,9 @@ class SearchForm extends Component {
 
   render() {
     return (
-      <form className="SearchForm" onSubmit={this.handleSubmit}>
-        <button type="submit" className="SearchForm-button">
-          <span className="SearchForm-button-label">Search</span>
-        </button>
-
+      <form className={s.SearchForm} onSubmit={this.handleSubmit}>
         <input
-          className="SearchForm-input"
+          className={s.SearchForm_input}
           type="text"
           autoComplete="off"
           autoFocus
@@ -37,6 +35,10 @@ class SearchForm extends Component {
           value={this.state.query}
           onChange={this.handleChange}
         />
+
+        <button type="submit" className={s.SearchForm_button}>
+          Search
+        </button>
       </form>
     );
   }

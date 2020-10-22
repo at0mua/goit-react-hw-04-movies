@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-import { getMovieByQuery } from "../services/ApiService";
-import SearchForm from "../components/SearchForm";
+import { getMovieByQuery } from "../../services/ApiService";
+import SearchForm from "../../components/SearchForm/SearchForm";
+
+import s from "./Movies.module.css";
 
 class Movies extends Component {
   state = {
@@ -47,10 +49,10 @@ class Movies extends Component {
 
     return (
       <>
-        <h2>Movies</h2>
+        <h2 className={s.title}>Movies</h2>
         <SearchForm onSubmit={this.handleChangeQuery} />
         {movies.length > 0 && (
-          <ul>
+          <ul className={s.movies_list}>
             {movies.map((movie) => (
               <li key={movie.id}>
                 <NavLink

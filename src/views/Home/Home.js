@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-import { getTrending } from "../services/ApiService";
+import { getTrending } from "../../services/ApiService";
+
+import s from "./Home.module.css";
 
 class Home extends Component {
   state = {
@@ -14,17 +16,22 @@ class Home extends Component {
 
   render() {
     const { movies } = this.state;
-    const { match } = this.props;
+    const { match, location } = this.props;
 
     return (
       <>
-        <h2>Trending today</h2>
+        <h2 className={s.title}>Trending today</h2>
 
         {movies.length > 0 && (
-          <ul>
+          <ul className={s.movie_list}>
             {movies.map((movie) => (
               <li key={movie.id}>
-                <NavLink to={`${match.url}movies/${movie.id}`}>
+                <NavLink
+                  to={{
+                    pathname: `${match.url}movies/${movie.id}`,
+                    state: { from: location },
+                  }}
+                >
                   {movie.title}
                 </NavLink>
               </li>

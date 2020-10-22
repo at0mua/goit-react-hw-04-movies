@@ -8,6 +8,14 @@ import s from "./Cast.module.css";
 class Casts extends Component {
   static propTypes = {
     movieId: PropTypes.string.isRequired,
+    casts: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        profile_path: PropTypes.string,
+        name: PropTypes.string.isRequired,
+        character: PropTypes.string.isRequired,
+      })
+    ),
   };
 
   state = {
@@ -26,11 +34,11 @@ class Casts extends Component {
       <>
         {casts.length > 0 && (
           <ul className={s.casts_list}>
-            {casts.map((cast) => (
-              <li key={cast.cast_id} className={s.casts_item}>
-                <img src={getImg(cast.profile_path)} alt="actor" width="150" />
-                <p>{cast.name}</p>
-                <p>Character: {cast.character}</p>
+            {casts.map(({ id, profile_path, name, character }) => (
+              <li key={id} className={s.casts_item}>
+                <img src={getImg(profile_path)} alt="actor" width="150" />
+                <p>{name}</p>
+                <p>Character: {character}</p>
               </li>
             ))}
           </ul>

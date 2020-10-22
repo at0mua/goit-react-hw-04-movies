@@ -8,6 +8,13 @@ import s from "./Reviews.module.css";
 class Reviews extends Component {
   static propTypes = {
     movieId: PropTypes.string.isRequired,
+    reviews: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        author: PropTypes.string.isRequired,
+        content: PropTypes.string.isRequired,
+      })
+    ),
   };
 
   state = {
@@ -26,10 +33,10 @@ class Reviews extends Component {
       <>
         {reviews.length > 0 ? (
           <ul className={s.reviews_list}>
-            {reviews.map((review) => (
-              <li key={review.id} className={s.reviews_item}>
-                <h4>Author: {review.author}</h4>
-                <p>{review.content}</p>
+            {reviews.map(({ id, author, content }) => (
+              <li key={id} className={s.reviews_item}>
+                <h4>Author: {author}</h4>
+                <p>{content}</p>
               </li>
             ))}
           </ul>

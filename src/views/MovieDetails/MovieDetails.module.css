@@ -30,3 +30,21 @@
 .movie_genre_item:not(:last-child) {
   margin-right: 15px;
 }
+
+.movie_add_info {
+  padding: 15px;
+  border-bottom: 2px solid gray;
+}
+
+.movie_add_title {
+  margin: 0;
+}
+
+.link {
+  padding: 15px;
+  color: black;
+}
+
+.link_active {
+  color: rgb(245, 97, 39);
+}
