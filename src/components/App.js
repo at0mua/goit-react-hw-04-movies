@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
+import Navigation from "./Navigation/Navigation";
 import Home from "../views/Home";
 import Movies from "../views/Movies";
-import MovieDetails from "../views/MovieDetails";
+import MovieDetails from "../views/MovieDetails/MovieDetails";
 import routes from "../routes";
-
-import Navigation from "./Navigation/Navigation";
 
 class App extends Component {
   render() {

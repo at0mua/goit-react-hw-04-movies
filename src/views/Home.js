@@ -12,10 +12,6 @@ class Home extends Component {
     getTrending().then((movies) => this.setState({ movies }));
   }
 
-  //   componentDidMount() {
-  //     getTrending().then((result) => console.log(result));
-  //   }
-
   render() {
     const { movies } = this.state;
     const { match } = this.props;

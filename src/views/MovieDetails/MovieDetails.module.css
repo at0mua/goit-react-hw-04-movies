@@ -1,0 +1,32 @@
+.back_btn {
+  margin-left: 15px;
+}
+
+.movie_card {
+  display: flex;
+  padding: 15px;
+  border-bottom: 2px solid gray;
+}
+
+.card_img {
+  min-width: 280px;
+}
+
+.movie_info {
+  padding: 20px;
+}
+
+.movie_title {
+  margin: 0;
+}
+
+.movie_genre_list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+}
+
+.movie_genre_item:not(:last-child) {
+  margin-right: 15px;
+}

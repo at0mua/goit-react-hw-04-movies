@@ -15,10 +15,21 @@ const getMovieByQuery = (searchQuery) => {
     .then(({ data }) => data.results);
 };
 
-const getMovieById = (movieId) => {
-  return axios
-    .get(`${baseUrl}movie/${movieId}?api_key=${key}`)
-    .then(({ data }) => data);
+const getMovieById = (movieId, type) => {
+  switch (type) {
+    case "credits":
+      return axios
+        .get(`${baseUrl}movie/${movieId}/credits?api_key=${key}`)
+        .then(({ data }) => data.cast);
+    case "reviews":
+      return axios
+        .get(`${baseUrl}movie/${movieId}/reviews?api_key=${key}`)
+        .then(({ data }) => data.results);
+    default:
+      return axios
+        .get(`${baseUrl}movie/${movieId}?api_key=${key}`)
+        .then(({ data }) => data);
+  }
 };
 
 const getImg = (posterPath) => {
