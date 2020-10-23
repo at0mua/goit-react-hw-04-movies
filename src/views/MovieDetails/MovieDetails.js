@@ -1,11 +1,18 @@
-import React, { Component } from "react";
-import { NavLink, Route } from "react-router-dom";
+import React, { Suspense, lazy, Component } from "react";
+import { Switch, NavLink, Route } from "react-router-dom";
 
 import { getMovieById, getImg } from "../../services/ApiService";
-import Cast from "../../components/Cast/Cast.js";
-import Reviews from "../../components/Reviews/Reviews";
 import routes from "../../routes";
 import s from "./MovieDetails.module.css";
+
+const Cast = lazy(() =>
+  import("../../components/Cast/Cast" /* webpackChunkName: "cast-page" */)
+);
+const Reviews = lazy(() =>
+  import(
+    "../../components/Reviews/Reviews" /*webpackChunkName: "reviews-page" */
+  )
+);
 
 class MovieDetails extends Component {
   state = {
@@ -29,9 +36,11 @@ class MovieDetails extends Component {
 
   render() {
     const { movie } = this.state;
-    const { state } = this.props.location;
-    const { url, path } = this.props.match;
+    const { match, location } = this.props;
+    const { url, path } = match;
     const date = new Date();
+    const checkState = location.state ? location.state.from : location;
+
     return (
       <div className={s.movie_details}>
         <button
@@ -76,7 +85,7 @@ class MovieDetails extends Component {
           <NavLink
             to={{
               pathname: `${url}/cast`,
-              state: { from: state.from },
+              state: { from: checkState },
             }}
             className={s.link}
             activeClassName={s.link_active}
@@ -86,7 +95,7 @@ class MovieDetails extends Component {
           <NavLink
             to={{
               pathname: `${url}/reviews`,
-              state: { from: state.from },
+              state: { from: checkState },
             }}
             className={s.link}
             activeClassName={s.link_active}
@@ -94,18 +103,22 @@ class MovieDetails extends Component {
             Reviews
           </NavLink>
         </div>
-        <Route
-          path={`${path}/cast`}
-          render={({ match: { params } }) => {
-            return <Cast movieId={params.movieId} />;
-          }}
-        />
-        <Route
-          path={`${path}/reviews`}
-          render={({ match: { params } }) => {
-            return <Reviews movieId={params.movieId} />;
-          }}
-        />
+        <Suspense fallback={<h4>Loading...</h4>}>
+          <Switch>
+            <Route
+              path={`${path}/cast`}
+              render={({ match: { params } }) => {
+                return <Cast movieId={params.movieId} />;
+              }}
+            />
+            <Route
+              path={`${path}/reviews`}
+              render={({ match: { params } }) => {
+                return <Reviews movieId={params.movieId} />;
+              }}
+            />
+          </Switch>
+        </Suspense>
       </div>
     );
   }
